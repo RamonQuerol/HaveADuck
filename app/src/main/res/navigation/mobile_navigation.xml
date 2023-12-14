@@ -14,12 +14,17 @@
     <fragment
         android:id="@+id/nav_gallery"
         android:name="es.upm.etsiinf.haveaduck.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
+        android:label="@string/menu_guardados"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="es.upm.etsiinf.haveaduck.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_favoritos"
+        android:name="es.upm.etsiinf.haveaduck.ui.favoritos.FavoritosFragment"
+        android:label="@string/menu_favoritos"
+        tools:layout="@layout/fragment_favoritos" />
+    <fragment
+        android:id="@+id/nav_patoCamara"
+        android:name="es.upm.etsiinf.haveaduck.ui.patocamara.PatoCamaraFragment"
+        android:label="@string/menu_patocamara"
+        tools:layout="@layout/fragment_patocamara" />
 </navigation>

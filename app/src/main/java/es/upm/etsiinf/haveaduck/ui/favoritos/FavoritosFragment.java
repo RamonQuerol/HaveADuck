@@ -1,4 +1,4 @@
-package es.upm.etsiinf.haveaduck.ui.slideshow;
+package es.upm.etsiinf.haveaduck.ui.favoritos;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import es.upm.etsiinf.haveaduck.databinding.FragmentSlideshowBinding;
+import es.upm.etsiinf.haveaduck.databinding.FragmentFavoritosBinding;
 
-public class SlideshowFragment extends Fragment {
+public class FavoritosFragment extends Fragment {
 
-    private FragmentSlideshowBinding binding;
+    private FragmentFavoritosBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+        FavoritosViewModel favoritosViewModel =
+                new ViewModelProvider(this).get(FavoritosViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentFavoritosBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        favoritosViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

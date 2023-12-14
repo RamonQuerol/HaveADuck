@@ -1,16 +1,16 @@
-package es.upm.etsiinf.haveaduck.ui.home;
+package es.upm.etsiinf.haveaduck.ui.favoritos;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class FavoritosViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public FavoritosViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Cargando patos");
+        mText.setValue("This is slideshow fragment");
     }
 
     public LiveData<String> getText() {
