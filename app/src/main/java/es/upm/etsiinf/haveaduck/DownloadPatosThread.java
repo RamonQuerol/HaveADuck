@@ -47,14 +47,12 @@ public class DownloadPatosThread implements Runnable{
 
             for (int i = 0; i<12; i++){
 
-                String jsonPlanetList= NetUtils.getURLText(baseURL + "/random");
-                ImageOnlyPato pato = gson.fromJson(jsonPlanetList, ImageOnlyPato.class);
+                String jsonPatoList= NetUtils.getURLText(baseURL + "/random");
+                ImageOnlyPato pato = gson.fromJson(jsonPatoList, ImageOnlyPato.class);
                 Bitmap imagenPato = NetUtils.getURLImage(pato.getUrl());
                 pato.setImageBtm(imagenPato);
                 pls.add(pato);
             }
-
-            //Log.i(TAG, jsonPlanetList);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
