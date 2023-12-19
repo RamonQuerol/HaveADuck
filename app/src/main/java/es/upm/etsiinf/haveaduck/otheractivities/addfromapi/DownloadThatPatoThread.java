@@ -22,12 +22,16 @@ public class DownloadThatPatoThread implements Runnable{
         try {
 
             Bitmap imagenPato = NetUtils.getURLImage(url);
-            activity.setImage(imagenPato);
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    activity.setImage(imagenPato);
+                }
+            });
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
 
 }
