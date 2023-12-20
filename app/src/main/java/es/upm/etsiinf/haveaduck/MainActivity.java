@@ -1,6 +1,12 @@
 package es.upm.etsiinf.haveaduck;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.Menu;
 
 import com.google.android.material.navigation.NavigationView;
@@ -39,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        scheduleDailyNotification(); // Daily notification
     }
 
     @Override
@@ -53,5 +60,39 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    private void scheduleDailyNotification() {
+        // Set up the notification time
+        long notificationTime = getNotificationTime();
+
+        // Create an Intent for the BroadcastReceiver
+        Intent intent = new Intent(this, DailyNotificationReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                this,
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+        );
+
+        // Set up the AlarmManager to trigger the notification
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setRepeating(
+                AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + notificationTime,
+                AlarmManager.INTERVAL_DAY,
+                pendingIntent
+        );
+    }
+
+    private long getNotificationTime() {
+        // Set the notification time (10:00 AM)
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 10);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+
+        return calendar.getTimeInMillis();
     }
 }
