@@ -1,4 +1,4 @@
-package es.upm.etsiinf.haveaduck;
+package es.upm.etsiinf.haveaduck.notifications;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.os.Build;
+
+import es.upm.etsiinf.haveaduck.R;
 
 public class Notifications {
     private static final String CHANNEL_ID = "daily_notification_channel";

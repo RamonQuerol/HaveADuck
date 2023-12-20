@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.Menu;
 
 import com.google.android.material.navigation.NavigationView;
@@ -19,6 +18,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import es.upm.etsiinf.haveaduck.databinding.ActivityMainBinding;
+import es.upm.etsiinf.haveaduck.notifications.DailyNotificationReceiver;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -72,14 +72,15 @@ public class MainActivity extends AppCompatActivity {
                 this,
                 0,
                 intent,
-                PendingIntent.FLAG_UPDATE_CURRENT
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
         );
 
         // Set up the AlarmManager to trigger the notification
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.setRepeating(
                 AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + notificationTime,
+                //SystemClock.elapsedRealtime() + notificationTime,
+                notificationTime,
                 AlarmManager.INTERVAL_DAY,
                 pendingIntent
         );
@@ -89,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
         // Set the notification time (10:00 AM)
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 10);
-        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.HOUR_OF_DAY, 21);
+        calendar.set(Calendar.MINUTE, 4);
         calendar.set(Calendar.SECOND, 0);
 
         return calendar.getTimeInMillis();

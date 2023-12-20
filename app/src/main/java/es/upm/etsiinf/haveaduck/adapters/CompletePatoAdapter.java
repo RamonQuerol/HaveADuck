@@ -12,19 +12,18 @@ import androidx.fragment.app.Fragment;
 
 import java.util.List;
 
-//import es.upm.etsiinf.haveaduck.AddFromApiActivity;
-import es.upm.etsiinf.haveaduck.otheractivities.addfromapi.AddDataFromApiActivity;
 import es.upm.etsiinf.haveaduck.R;
-import es.upm.etsiinf.haveaduck.model.ImageOnlyPato;
+import es.upm.etsiinf.haveaduck.model.CompletePato;
+import es.upm.etsiinf.haveaduck.otheractivities.showpato.ShowPatoActivity;
 
-public class ImageOnlyPatoAdapter extends BaseAdapter {
+public class CompletePatoAdapter extends BaseAdapter {
 
     private Fragment ctx;
-    private List<ImageOnlyPato> data;
+    private List<CompletePato> data;
 
-    public static final String ATTR_URL = "URL";
+    public static final String ATTR_ID = "ID";
 
-    public ImageOnlyPatoAdapter(Fragment ctx, List<ImageOnlyPato> data){
+    public CompletePatoAdapter(Fragment ctx, List<CompletePato> data){
         this.ctx = ctx;
         this.data = data;
     }
@@ -51,18 +50,17 @@ public class ImageOnlyPatoAdapter extends BaseAdapter {
             view = layoutInflater.inflate(R.layout.pato_image_list_layout, null);
         }
 
-        ((ImageView)view.findViewById(R.id.pato_item_image_inicio)).setImageBitmap((data.get(position).getImageBtm()));
+        ((ImageView)view.findViewById(R.id.pato_item_image_inicio)).setImageBitmap((data.get(position).getImagen()));
         ((Button)view.findViewById(R.id.pato_item_button_inicio)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String imageUrl = data.get(position).getUrl();
-                Intent i = new Intent(ctx.getContext(), AddDataFromApiActivity.class);
-                i.putExtra(ATTR_URL,imageUrl);
+                int id = data.get(position).getId();
+                Intent i = new Intent(ctx.getContext(), ShowPatoActivity.class);
+                i.putExtra(ATTR_ID,id);
                 ctx.startActivity(i);
             }
         });
 
         return view;
     }
-
 }

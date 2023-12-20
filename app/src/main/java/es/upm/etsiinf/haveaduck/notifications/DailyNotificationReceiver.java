@@ -1,10 +1,12 @@
-package es.upm.etsiinf.haveaduck;
+package es.upm.etsiinf.haveaduck.notifications;
 
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
+import es.upm.etsiinf.haveaduck.notifications.Notifications;
 
 public class DailyNotificationReceiver extends BroadcastReceiver {
 

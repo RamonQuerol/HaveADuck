@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".otheractivities.addfromapi.AddDataFromApiActivity">
+    tools:context=".otheractivities.showpato.ShowPatoActivity">
 
     <ImageView
-        android:id="@+id/add_api_imageView"
+        android:id="@+id/showPato_imageView"
         android:layout_width="377dp"
         android:layout_height="376dp"
         android:src="@drawable/ic_launcher_foreground"
@@ -18,39 +18,35 @@
         app:layout_constraintVertical_bias="0.081"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
-    <EditText
-        android:id="@+id/add_api_nombre_editText"
+    <TextView
+        android:id="@+id/showPato_nombre_textView"
         android:layout_width="331dp"
         android:layout_height="55dp"
         android:ems="10"
-        android:hint="Introduce el nombre del pato"
-        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.212"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_api_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/showPato_imageView"
         app:layout_constraintVertical_bias="0.103" />
 
-    <EditText
-        android:id="@+id/add_api_descripcion_editText"
+    <TextView
+        android:id="@+id/showPato_descripcion_textView"
         android:layout_width="383dp"
         android:layout_height="148dp"
         android:layout_marginBottom="84dp"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="Introduce la descripcion de su pato"
-        android:inputType="textMultiLine"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.607"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_api_nombre_editText"
+        app:layout_constraintTop_toBottomOf="@+id/showPato_nombre_textView"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/add_api_guardar_button"
+        android:id="@+id/showPato_guardar_button"
         android:layout_width="141dp"
         android:layout_height="59dp"
         android:text="Guardar pato"
@@ -58,19 +54,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.94"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_api_descripcion_editText"
+        app:layout_constraintTop_toBottomOf="@+id/showPato_descripcion_textView"
         app:layout_constraintVertical_bias="0.36" />
 
     <Button
-        android:id="@+id/add_api_volver_button"
+        android:id="@+id/showPato_volver_button"
         android:layout_width="141dp"
         android:layout_height="59dp"
         android:text="Volver atras"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/add_api_guardar_button"
+        app:layout_constraintEnd_toStartOf="@+id/showPato_guardar_button"
         app:layout_constraintHorizontal_bias="0.141"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_api_descripcion_editText"
+        app:layout_constraintTop_toBottomOf="@+id/showPato_descripcion_textView"
         app:layout_constraintVertical_bias="0.36" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
