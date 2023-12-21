@@ -9,6 +9,14 @@ public class CompletePato {
     private String name;
     private String descripcion;
 
+    //Booleano guardado como int para poder guardarlo correctamente en la base de datos
+    //Indica si el pato es de los favoritos o no
+    private int favorite;
+
+    public CompletePato(){
+        favorite = 0;
+    }
+
     public int getId() {
         return id;
     }
@@ -39,6 +47,14 @@ public class CompletePato {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public int getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(int favorite) {
+        this.favorite = favorite;
     }
 
 }

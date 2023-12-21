@@ -4,12 +4,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import es.upm.etsiinf.haveaduck.R;
+import es.upm.etsiinf.haveaduck.adapters.CompletePatoAdapter;
+import es.upm.etsiinf.haveaduck.bd.HandlerBD;
 import es.upm.etsiinf.haveaduck.databinding.FragmentFavoritosBinding;
 
 public class FavoritosFragment extends Fragment {
@@ -26,6 +30,15 @@ public class FavoritosFragment extends Fragment {
 
         final TextView textView = binding.textSlideshow;
         favoritosViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        //Se cogen los patos de la base de datos y se añaden a la lista
+        HandlerBD handlerBD = new HandlerBD(root.getContext());
+        handlerBD.open();
+        CompletePatoAdapter adapter = new CompletePatoAdapter(this, handlerBD.getAllFavorites());
+        handlerBD.close();
+
+        ((GridView)root.findViewById(R.id.favoritos_main_list)).setAdapter(adapter);
+
         return root;
     }
 

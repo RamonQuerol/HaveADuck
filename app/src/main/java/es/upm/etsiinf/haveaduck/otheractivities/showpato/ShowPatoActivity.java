@@ -19,7 +19,7 @@ import es.upm.etsiinf.haveaduck.otheractivities.addfromapi.AddDataFromApiActivit
 
 public class ShowPatoActivity extends AppCompatActivity {
 
-    int idPato;
+    CompletePato pato;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +28,12 @@ public class ShowPatoActivity extends AppCompatActivity {
 
         //Recoge el id del pato
         Intent i = getIntent();
-        idPato = i.getIntExtra(CompletePatoAdapter.ATTR_ID, 1);
+        int idPato = i.getIntExtra(CompletePatoAdapter.ATTR_ID, 1);
 
         //Se coge el pato de la base de datos
         HandlerBD handlerBD = new HandlerBD(this);
         handlerBD.open();
-        CompletePato pato = handlerBD.getPato(idPato);
+        pato = handlerBD.getPato(idPato);
         handlerBD.close();
 
         //Se muestra el pato y su información
@@ -49,6 +49,113 @@ public class ShowPatoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent volver = new Intent(ShowPatoActivity.this, MainActivity.class);
                 startActivity(volver);
+            }
+        });
+
+        //Boton para eliminar el pato
+        Button deleteButton = findViewById(R.id.showPato_delete_button);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HandlerBD handlerBD = new HandlerBD(ShowPatoActivity.this);
+                handlerBD.open();
+                handlerBD.deletePato(pato.getId());
+                handlerBD.close();
+
+                Intent volver = new Intent(ShowPatoActivity.this, MainActivity.class);
+                startActivity(volver);
+            }
+        });
+
+        //Botones para añadir y quitar de favoritos (Los nombres muestran el estado antes de realizar la accion)
+        Button favoriteButton = findViewById(R.id.showPato_favorite_button); //Boton que muestra que ahora esta en favoritos
+        Button notFavoriteButton = findViewById(R.id.showPato_notFavorite_button); //Boton que muestra que ahora no esta en favoritos
+
+        //Como ahora mismo el pato esta en favoritos se cambiara su estado a no favorito
+        favoriteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HandlerBD handlerBD = new HandlerBD(ShowPatoActivity.this);
+                handlerBD.open();
+                pato.setFavorite(handlerBD.toggleFavorite(pato));
+                handlerBD.close();
+
+                notFavoriteButton.setVisibility(Button.VISIBLE);
+                favoriteButton.setVisibility(Button.INVISIBLE);
+            }
+        });
+
+        //Como ahora mismo el pato no esta en favoritos se cambiara su estado a favorito
+        notFavoriteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HandlerBD handlerBD = new HandlerBD(ShowPatoActivity.this);
+                handlerBD.open();
+                pato.setFavorite(handlerBD.toggleFavorite(pato));
+                handlerBD.close();
+
+                favoriteButton.setVisibility(Button.VISIBLE);
+                notFavoriteButton.setVisibility(Button.INVISIBLE);
+            }
+        });
+
+
+        //Para la edicion de patos
+        Button editButton = findViewById(R.id.showPato_edit_button);
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        //Para compartir patos
+        Button shareButton = findViewById(R.id.showPato_share_button);
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        //Toggle para hacer aparecer y desaparecer los botones
+        Button optionsButton = findViewById(R.id.showPato_options_button);
+        Button cancelButton = findViewById(R.id.showPato_cancel_button);
+
+        //optionButton hace aparecer los botones de accion (los anteriores mostrados)
+        optionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancelButton.setVisibility(Button.VISIBLE);
+                deleteButton.setVisibility(Button.VISIBLE);
+
+                //Se muestra un boton u otro segun si es un pato favorito o no
+                if(pato.getFavorite()>0){
+                    favoriteButton.setVisibility(Button.VISIBLE);
+                }else{
+                    notFavoriteButton.setVisibility(Button.VISIBLE);
+                }
+
+                editButton.setVisibility(Button.VISIBLE);
+                shareButton.setVisibility(Button.VISIBLE);
+
+                optionsButton.setVisibility(Button.INVISIBLE);
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareButton.setVisibility(Button.INVISIBLE);
+                editButton.setVisibility(Button.INVISIBLE);
+                notFavoriteButton.setVisibility(Button.INVISIBLE);
+                favoriteButton.setVisibility(Button.INVISIBLE);
+                deleteButton.setVisibility(Button.INVISIBLE);
+
+                optionsButton.setVisibility(Button.VISIBLE);
+
+                cancelButton.setVisibility(Button.INVISIBLE);
             }
         });
     }

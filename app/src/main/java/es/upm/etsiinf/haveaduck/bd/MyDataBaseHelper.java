@@ -9,7 +9,7 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
 
     //Datos base de datos
     private static String DB_NAME = "quack_db.bd";
-    private static int VERSION_ACTUAL = 2;
+    private static int VERSION_ACTUAL = 3;
 
     //Datos de patos guardados
     public static final String TABLE_PATOS = "patos";
@@ -17,6 +17,7 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
     public static final String PATO_IMAGE = "image";
     public  static  final  String PATO_NAME = "name";
     public static final String PATO_DESCRIPTION = "description";
+    public static final String PATO_FAVORITO = "favorito";
 
     //Datos de fotos sacadas desde el dispositivo
     public static final String TABLE_PHOTOS = "camera";
@@ -28,7 +29,8 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
     private static final String PATO_TABLE_CREATE = "create table "
             + TABLE_PATOS + "(" + PATO_ID
             + " integer primary key autoincrement, " +  PATO_IMAGE
-            + " blob not null, " + PATO_NAME + " text not null, " + PATO_DESCRIPTION + " text not null);";
+            + " blob not null, " + PATO_NAME + " text not null, " + PATO_DESCRIPTION + " text not null, "
+            + PATO_FAVORITO + " integer not null);";
     private static final String PHOTO_TABLE_CREATE = "create table " + TABLE_PHOTOS + "(" + PHOTO_ID
             + " integer primary key autoincrement, " +  PHOTO_IMAGE + " blob not null);";
 

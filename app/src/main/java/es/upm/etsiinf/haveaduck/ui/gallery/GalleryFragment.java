@@ -32,7 +32,7 @@ public class GalleryFragment extends Fragment {
         final TextView textView = binding.textGallery;
         galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
-        //Se añade el pato a la base de datos
+        //Se cogen los patos de la base de datos y se añaden a la lista
         HandlerBD handlerBD = new HandlerBD(root.getContext());
         handlerBD.open();
         CompletePatoAdapter adapter = new CompletePatoAdapter(this, handlerBD.getAllPatos());
