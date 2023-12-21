@@ -79,6 +79,7 @@ public class HandlerBD {
         return newState;
     }
 
+    //Añade un pato a la base de datos
     public long addPato(CompletePato pato){
         ContentValues vals = new ContentValues();
 
@@ -92,6 +93,19 @@ public class HandlerBD {
         return database.insert(MyDataBaseHelper.TABLE_PATOS, null, vals);
     }
 
+    public int updatePato(CompletePato pato){
+        ContentValues vals = new ContentValues();
+
+        vals.put(MyDataBaseHelper.PATO_IMAGE, BdUtils.bitmapToByteArray(pato.getImagen()));
+        vals.put(MyDataBaseHelper.PATO_NAME, pato.getName());
+        vals.put(MyDataBaseHelper.PATO_DESCRIPTION, pato.getDescripcion());
+
+        //Devuelve el id del pato
+        return database.update(MyDataBaseHelper.TABLE_PATOS, vals,
+                MyDataBaseHelper.PATO_ID + " = " + pato.getId(), null);
+    }
+
+    //Elimina un pato de la base de datos
     public void deletePato(int id){
         database.delete(MyDataBaseHelper.TABLE_PATOS,
                 MyDataBaseHelper.PATO_ID + " = " + id, null);
@@ -110,6 +124,7 @@ public class HandlerBD {
         return pato;
     }
 
+    //Recoge todos los patos que haya en el cursor
     private List<CompletePato> cursorToMultiplePatos(Cursor cursor){
         List<CompletePato> allPat = new ArrayList<CompletePato>();
         cursor.moveToFirst();

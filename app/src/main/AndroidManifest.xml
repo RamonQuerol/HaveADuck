@@ -16,6 +16,9 @@
         android:theme="@style/Theme.HaveADuck"
         tools:targetApi="31">
         <activity
+            android:name=".otheractivities.editpato.EditPatoActivity"
+            android:exported="false" />
+        <activity
             android:name=".otheractivities.showpato.ShowPatoActivity"
             android:exported="false" />
         <activity

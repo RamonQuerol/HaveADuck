@@ -12,4 +12,6 @@
     <string name="menu_favoritos">Favoritos</string>
     <string name="menu_guardados">Patos guardados</string>
     <string name="get_me_more_patos">Get me more Patos</string>
+    <string name="introduce_la_descripcion">Introduce la descripcion de su pato</string>
+    <string name="introduce_el_nombre">Introduce el nombre del pato</string>
 </resources>

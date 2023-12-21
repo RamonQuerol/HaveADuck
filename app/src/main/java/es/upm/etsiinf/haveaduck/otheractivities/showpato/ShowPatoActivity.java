@@ -16,6 +16,7 @@ import es.upm.etsiinf.haveaduck.adapters.CompletePatoAdapter;
 import es.upm.etsiinf.haveaduck.bd.HandlerBD;
 import es.upm.etsiinf.haveaduck.model.CompletePato;
 import es.upm.etsiinf.haveaduck.otheractivities.addfromapi.AddDataFromApiActivity;
+import es.upm.etsiinf.haveaduck.otheractivities.editpato.EditPatoActivity;
 
 public class ShowPatoActivity extends AppCompatActivity {
 
@@ -105,7 +106,9 @@ public class ShowPatoActivity extends AppCompatActivity {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = new Intent(ShowPatoActivity.this, EditPatoActivity.class);
+                i.putExtra(CompletePatoAdapter.ATTR_ID,pato.getId());
+                startActivity(i);
             }
         });
 

@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".otheractivities.addfromapi.AddDataFromApiActivity">
+    tools:context=".otheractivities.editpato.EditPatoActivity">
 
     <ImageView
-        android:id="@+id/add_api_imageView"
+        android:id="@+id/editPato_imageView"
         android:layout_width="377dp"
         android:layout_height="376dp"
         android:src="@drawable/ic_launcher_foreground"
@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <EditText
-        android:id="@+id/add_api_nombre_editText"
+        android:id="@+id/editPato_nombre_editText"
         android:layout_width="331dp"
         android:layout_height="55dp"
         android:ems="10"
@@ -29,11 +29,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.212"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_api_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/editPato_imageView"
         app:layout_constraintVertical_bias="0.103" />
 
     <EditText
-        android:id="@+id/add_api_descripcion_editText"
+        android:id="@+id/editPato_descripcion_editText"
         android:layout_width="383dp"
         android:layout_height="148dp"
         android:layout_marginBottom="84dp"
@@ -46,31 +46,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.607"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_api_nombre_editText"
+        app:layout_constraintTop_toBottomOf="@+id/editPato_nombre_editText"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/add_api_guardar_button"
+        android:id="@+id/editPato_guardar_button"
         android:layout_width="141dp"
         android:layout_height="59dp"
-        android:text="Guardar pato"
+        android:text="Finalizar edicion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.94"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_api_descripcion_editText"
+        app:layout_constraintTop_toBottomOf="@+id/editPato_descripcion_editText"
         app:layout_constraintVertical_bias="0.36" />
 
     <Button
-        android:id="@+id/add_api_volver_button"
+        android:id="@+id/editPato_volver_button"
         android:layout_width="141dp"
         android:layout_height="59dp"
         android:text="Volver atras"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/add_api_guardar_button"
+        app:layout_constraintEnd_toStartOf="@+id/editPato_guardar_button"
         app:layout_constraintHorizontal_bias="0.141"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_api_descripcion_editText"
+        app:layout_constraintTop_toBottomOf="@+id/editPato_descripcion_editText"
         app:layout_constraintVertical_bias="0.36" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
