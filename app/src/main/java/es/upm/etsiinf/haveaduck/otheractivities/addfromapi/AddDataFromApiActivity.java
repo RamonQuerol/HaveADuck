@@ -1,7 +1,12 @@
 package es.upm.etsiinf.haveaduck.otheractivities.addfromapi;
 
+import static es.upm.etsiinf.haveaduck.adapters.CompletePatoAdapter.ATTR_ID;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -15,6 +20,8 @@ import es.upm.etsiinf.haveaduck.R;
 import es.upm.etsiinf.haveaduck.adapters.ImageOnlyPatoAdapter;
 import es.upm.etsiinf.haveaduck.bd.HandlerBD;
 import es.upm.etsiinf.haveaduck.model.CompletePato;
+import es.upm.etsiinf.haveaduck.notifications.NotificationHandler;
+import es.upm.etsiinf.haveaduck.otheractivities.showpato.ShowPatoActivity;
 
 public class AddDataFromApiActivity extends AppCompatActivity {
 
@@ -60,8 +67,23 @@ public class AddDataFromApiActivity extends AppCompatActivity {
                 //Se añade el pato a la base de datos
                 HandlerBD handlerBD = new HandlerBD(AddDataFromApiActivity.this);
                 handlerBD.open();
-                handlerBD.addPato(pato);
+                long id = handlerBD.addPato(pato);
                 handlerBD.close();
+
+                //Lanzar notificacion
+                NotificationHandler.createNotificationChannel(AddDataFromApiActivity.this);
+
+                Intent irANotificacion = new Intent(AddDataFromApiActivity.this, ShowPatoActivity.class);
+                irANotificacion.putExtra(ATTR_ID,(int)id);
+                PendingIntent pending = PendingIntent.getActivity(AddDataFromApiActivity.this, 1, irANotificacion, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+                String title = "¡Nuevo pato! 🦆";
+                String content = "Tu pato " + pato.getName() + " ha sido creado, ¡visitalo!";
+
+                Notification.Builder notification = NotificationHandler.buildNotification(AddDataFromApiActivity.this, title, content, pending);
+
+                NotificationManager manager = (NotificationManager)AddDataFromApiActivity.this.getSystemService(NOTIFICATION_SERVICE);
+                manager.notify(1, notification.build());
 
                 //Ya se ha terminado lo que hay que hacer en esta actividad asi que se sale
                 Intent volver = new Intent(AddDataFromApiActivity.this, MainActivity.class);

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.Menu;
 
 import com.google.android.material.navigation.NavigationView;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        scheduleDailyNotification(); // Daily notification
+
     }
 
     @Override
@@ -79,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.setRepeating(
                 AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                //SystemClock.elapsedRealtime() + notificationTime,
-                notificationTime,
+                SystemClock.elapsedRealtime() + notificationTime,
+                //notificationTime,
                 AlarmManager.INTERVAL_DAY,
                 pendingIntent
         );
@@ -90,8 +92,8 @@ public class MainActivity extends AppCompatActivity {
         // Set the notification time (10:00 AM)
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 21);
-        calendar.set(Calendar.MINUTE, 4);
+        calendar.set(Calendar.HOUR_OF_DAY, 8);
+        calendar.set(Calendar.MINUTE, 22);
         calendar.set(Calendar.SECOND, 0);
 
         return calendar.getTimeInMillis();

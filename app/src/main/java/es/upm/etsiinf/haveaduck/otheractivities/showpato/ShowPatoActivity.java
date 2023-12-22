@@ -1,7 +1,10 @@
 package es.upm.etsiinf.haveaduck.otheractivities.showpato;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.content.Intent;
@@ -9,6 +12,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Objects;
 
 import es.upm.etsiinf.haveaduck.MainActivity;
 import es.upm.etsiinf.haveaduck.R;
@@ -118,7 +125,37 @@ public class ShowPatoActivity extends AppCompatActivity {
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
 
+                Uri uri = safeImage(pato.getImagen());
+
+                //shareIntent.putExtra(Intent.EXTRA_TITLE, pato.getName());
+
+                shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                shareIntent.setType("image/jpeg");
+                startActivity(Intent.createChooser(shareIntent, null));
+            }
+
+            private Uri safeImage(Bitmap image){
+                File imageFolder = new File(ShowPatoActivity.this.getCacheDir(), "images");
+                Uri uri = null;
+
+                try {
+                    imageFolder.mkdirs();
+                    File file = new File(imageFolder, "imagen_compartir.jpg");
+                    FileOutputStream stream = new FileOutputStream(file);
+                    image.compress(Bitmap.CompressFormat.JPEG, 90, stream);
+                    stream.flush();
+                    stream.close();
+                    uri = FileProvider.getUriForFile(Objects.requireNonNull(ShowPatoActivity.this.getApplicationContext()),
+                            "es.upm.etsiinf.haveaduck.provider", file);
+
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+
+                return uri;
             }
         });
 

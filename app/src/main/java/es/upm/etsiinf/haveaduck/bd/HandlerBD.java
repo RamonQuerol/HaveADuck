@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.upm.etsiinf.haveaduck.model.CompletePato;
+import es.upm.etsiinf.haveaduck.model.PhotoQuack;
 import es.upm.etsiinf.haveaduck.utils.BdUtils;
 
 public class HandlerBD {
@@ -30,6 +31,10 @@ public class HandlerBD {
     public void close(){
         database.close();
     }
+
+
+    /////Operaciones patos//////
+
 
     //Recoge un pato de la base de datos
     public CompletePato getPato(int id){
@@ -135,4 +140,62 @@ public class HandlerBD {
         }
         return allPat;
     }
+
+
+    /////Operaciones fotoPatos//////
+
+    //Recoge una foto personal de la base de datos
+    public PhotoQuack getPhotoQuack(int id){
+
+        Cursor cursor = database.query(MyDataBaseHelper.TABLE_PHOTOS, photoColumns,
+                MyDataBaseHelper.PHOTO_ID + " = " + id,
+                null, null, null, null);
+
+        cursor.moveToFirst();
+        return cursorToPhotoQuack(cursor);
+    }
+
+    //Devuelve todas las fotos personales guardadas en la base de datos
+    public List<PhotoQuack> getAllPhotosQuacks(){
+
+        Cursor cursor = database.query(MyDataBaseHelper.TABLE_PHOTOS, photoColumns,
+                null, null, null, null, null);
+
+        List<PhotoQuack> allPhotos = new ArrayList<PhotoQuack>();
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            PhotoQuack foto = cursorToPhotoQuack(cursor);
+            allPhotos.add(foto);
+            cursor.moveToNext();
+        }
+
+        return allPhotos;
+    }
+
+    //Añade una nueva foto personal a la base de datos
+    public long addPhotoQuack(PhotoQuack foto){
+        ContentValues vals = new ContentValues();
+
+        vals.put(MyDataBaseHelper.PATO_IMAGE, BdUtils.bitmapToByteArray(foto.getImagen()));
+
+
+        //Devuelve el id asignado por la base de datos
+        return database.insert(MyDataBaseHelper.TABLE_PHOTOS, null, vals);
+    }
+
+    //Elimina un pato de la base de datos
+    public void deletePhotoQuack(int id){
+        database.delete(MyDataBaseHelper.TABLE_PHOTOS,
+                MyDataBaseHelper.PHOTO_ID + " = " + id, null);
+    }
+
+    private PhotoQuack cursorToPhotoQuack(Cursor cursor){
+        PhotoQuack foto = new PhotoQuack();
+
+        foto.setId(cursor.getInt(0));
+        foto.setImagen(BdUtils.byteArrayToBitmap(cursor.getBlob(1)));
+
+        return foto;
+    }
+
 }
