@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -60,24 +61,7 @@ public class PatoCamaraFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                // Ensure that there's a camera activity to handle the intent
-                //if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                    // Create the File where the photo should go
-                  //  File photoFile = null;
-                    //try {
-                      //  photoFile = createImageFile();
-                    //} catch (IOException ex) {
-                    //    ex.printStackTrace();
-                    //}
-                    // Continue only if the File was successfully created
-                    //if (photoFile != null) {
-                     //   Uri photoURI = FileProvider.getUriForFile(root.getContext(),
-                       ///         "es.upm.etsiinf.haveaduck.provider",
-                          //      photoFile);
-                        //takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                    //}
-                //}
             }
         });
 
@@ -95,9 +79,6 @@ public class PatoCamaraFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
             try {
-                //Uri imageUri = data.getData();
-                //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
-
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                 PhotoQuack foto = new PhotoQuack();
                 foto.setImagen(bitmap);
@@ -111,24 +92,8 @@ public class PatoCamaraFragment extends Fragment {
                 throw new RuntimeException(e);
             }
         }else{
-
+            Toast.makeText(binding.getRoot().getContext(), "La acción se ha cancelado", Toast.LENGTH_SHORT).show();
         }
     }
 
-    String currentPhotoPath;
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-
-        // Save a file: path for use with ACTION_VIEW intents
-        currentPhotoPath = image.getAbsolutePath();
-        return image;
-    }
 }

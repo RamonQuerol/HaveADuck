@@ -65,10 +65,10 @@ public class HomeFragment extends Fragment {
     }
 
     public void finishDownload(List<ImageOnlyPato> results){
-        //ArrayAdapter<Planet> adapter = new ArrayAdapter<Planet>(this, android.R.layout.activity_list_item, results);
+
         ImageOnlyPatoAdapter adapter = new ImageOnlyPatoAdapter(this, results);
         ((GridView)root.findViewById(R.id.inicio_main_list)).setAdapter(adapter);
-        //progressDialog.dismiss();
+
 
         root.findViewById(R.id.inicio_main_reload_button).setEnabled(true);
         root.findViewById(R.id.inicio_main_list_progressBar).setVisibility(View.INVISIBLE);

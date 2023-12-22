@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -90,6 +91,8 @@ public class ShowPatoActivity extends AppCompatActivity {
 
                 notFavoriteButton.setVisibility(Button.VISIBLE);
                 favoriteButton.setVisibility(Button.INVISIBLE);
+
+                Toast.makeText(ShowPatoActivity.this, pato.getName() + " ya no es de tus favoritos", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -104,6 +107,9 @@ public class ShowPatoActivity extends AppCompatActivity {
 
                 favoriteButton.setVisibility(Button.VISIBLE);
                 notFavoriteButton.setVisibility(Button.INVISIBLE);
+
+                Toast.makeText(ShowPatoActivity.this, pato.getName() + " ahora es de tus favoritos", Toast.LENGTH_SHORT).show();
+
             }
         });
 

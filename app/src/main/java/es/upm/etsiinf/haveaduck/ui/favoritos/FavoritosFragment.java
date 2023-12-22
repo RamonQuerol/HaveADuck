@@ -28,8 +28,6 @@ public class FavoritosFragment extends Fragment {
         binding = FragmentFavoritosBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textSlideshow;
-        favoritosViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         //Se cogen los patos de la base de datos y se añaden a la lista
         HandlerBD handlerBD = new HandlerBD(root.getContext());
